@@ -8,23 +8,29 @@ public class LockedDoorScript : MonoBehaviour
     [Header("Components")]
     public Animator doorAnimation;
     public GameObject openText;
-    public GameObject keyInv;
-    //public AudioSource doorSound;
-    //public AudioSource lockedSound;
+    private GameObject keyInv;
     public bool isLockedDoor = false;
 
     private bool inReach;
     private bool locked;
     private bool isOpen;
 
+    public bool keyPickedUp;
+
     void Start()
     {
+        keyPickedUp = false;
         inReach = false;
         isOpen = false;
         if (isLockedDoor)
         {
             locked = true; 
         }
+    }
+
+    public void KeyPickedUp()
+    {
+        keyPickedUp = true;
     }
 
     void OnTriggerEnter(Collider other)
@@ -47,7 +53,7 @@ public class LockedDoorScript : MonoBehaviour
 
     void Update()
     {
-        if (keyInv.activeInHierarchy)
+        if (keyPickedUp == true)
         {
             locked = false;
 
