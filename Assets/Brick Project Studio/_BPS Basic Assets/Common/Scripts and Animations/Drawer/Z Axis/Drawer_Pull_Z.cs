@@ -3,71 +3,69 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace SojaExiles
-
 {
-	public class Drawer_Pull_Z : MonoBehaviour
-	{
+    public class Drawer_Pull_Z : MonoBehaviour
+    {
+        [Header("Components")]
+        public Animator pull;
+        public bool open;
+        public GameObject openText;
 
-		public Animator pull;
-		public bool open;
-		public Transform Player;
+        private bool inReach;
 
-		void Start()
-		{
-			open = false;
-		}
+        void Start()
+        {
+            open = false;
+            inReach = false;
+        }
 
-		void OnMouseOver()
-		{
-			{
-				if (Player)
-				{
-					float dist = Vector3.Distance(Player.position, transform.position);
-					if (dist < 10)
-					{
-						print("object name");
-						if (open == false)
-						{
-							if (Input.GetMouseButtonDown(0))
-							{
-								StartCoroutine(opening());
-							}
-						}
-						else
-						{
-							if (open == true)
-							{
-								if (Input.GetMouseButtonDown(0))
-								{
-									StartCoroutine(closing());
-								}
-							}
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.tag == "Reach")
+            {
+                inReach = true;
+                openText.SetActive(true);
+            }
+        }
 
-						}
+        void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.tag == "Reach")
+            {
+                inReach = false;
+                openText.SetActive(false);
+            }
+        }
 
-					}
-				}
+        void Update()
+        {
+            if (inReach && Input.GetKeyDown(KeyCode.E))
+            {
+                if (!open)
+                {
+                    StartCoroutine(Opening());
+                }
+                else
+                {
+                    StartCoroutine(Closing());
+                }
+            }
+        }
 
-			}
+        IEnumerator Opening()
+        {
+            Debug.Log("You are opening the drawer");
+            pull.Play("openpull");
+            open = true;
+            yield return new WaitForSeconds(.5f);
+        }
 
-		}
-
-		IEnumerator opening()
-		{
-			print("you are opening the door");
-			pull.Play("openpull");
-			open = true;
-			yield return new WaitForSeconds(.5f);
-		}
-
-		IEnumerator closing()
-		{
-			print("you are closing the door");
-			pull.Play("closepush");
-			open = false;
-			yield return new WaitForSeconds(.5f);
-		}
-
-
-	}
+        IEnumerator Closing()
+        {
+            Debug.Log("You are closing the drawer");
+            pull.Play("closepush");
+            open = false;
+            yield return new WaitForSeconds(.5f);
+        }
+    }
 }
