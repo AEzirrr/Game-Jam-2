@@ -11,6 +11,8 @@ public class LockedDoorScript : MonoBehaviour
     private GameObject keyInv;
     public bool isLockedDoor = false;
 
+    public AudioSource LockedDoorSound;
+
     private bool inReach;
     private bool locked;
     private bool isOpen;
@@ -74,7 +76,7 @@ public class LockedDoorScript : MonoBehaviour
         if (locked && inReach && Input.GetButtonDown("Interact"))
         {
             Debug.Log("Door is Locked");
-            //lockedSound.Play();
+            LockedDoorSound.Play();
         }
 
     }

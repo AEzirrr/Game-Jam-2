@@ -168,10 +168,10 @@ MonoBehaviour:
     value: 1
   size:
     overrideState: 1
-    value: 1
+    value: 0.89
   lumContrib:
     overrideState: 1
-    value: 0.8
+    value: 0.43
 --- !u!114 &3629958039537550940
 MonoBehaviour:
   m_ObjectHideFlags: 3

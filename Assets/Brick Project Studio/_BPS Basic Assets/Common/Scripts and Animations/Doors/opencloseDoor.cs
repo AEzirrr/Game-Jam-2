@@ -23,7 +23,10 @@ namespace SojaExiles
             if (other.gameObject.CompareTag("Reach"))
             {
                 inReach = true;
-                openText.SetActive(true);
+                if(openText != null)
+                {
+                    openText.SetActive(true);
+                }
             }
         }
 
@@ -32,7 +35,10 @@ namespace SojaExiles
             if (other.gameObject.CompareTag("Reach"))
             {
                 inReach = false;
-                openText.SetActive(false);
+                if (openText != null)
+                {
+                    openText.SetActive(false);
+                }
             }
         }
 

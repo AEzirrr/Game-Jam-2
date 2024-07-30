@@ -5,6 +5,8 @@ public class Reach : MonoBehaviour
     [SerializeField]
     private LockedDoorScript lockedDoorScript;
 
+    public AudioSource keyPickUp;
+
     private bool isInTriggerZone = false;
     private GameObject keyObject;
 
@@ -33,8 +35,10 @@ public class Reach : MonoBehaviour
         if (isInTriggerZone && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("KEY PICKED UPPPPP");
+
             if (keyObject != null)
             {
+                keyPickUp.Play();
                 Destroy(keyObject);
                 lockedDoorScript.KeyPickedUp();
             }
