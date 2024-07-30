@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Light spotlight;
     [SerializeField] private GameObject ghost;
     [SerializeField] private Animator ghostAnimator;
+    [SerializeField] private AudioSource jumpScare;
 
     private float timer;
     private bool gameLost;
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
             if (timer >= 179.5f && !ghostActivated) // 179 seconds = 1 second left
             {
                 ActivateGhost();
+                jumpScare.Play();
             }
 
             if (timer >= 180f) // 180 seconds = 3 minutes
@@ -79,7 +81,7 @@ public class GameManager : MonoBehaviour
             spotlight.enabled = !spotlight.enabled;
             yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
         }
-        spotlight.enabled = false;
+        spotlight.enabled = true;
     }
 
     private void ActivateGhost()

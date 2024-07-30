@@ -42,6 +42,7 @@ public class PauseManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        Time.timeScale = 1;
+        SceneManager.LoadScene("MainMenu");
     }
 }

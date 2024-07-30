@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Exit : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class Exit : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) {
             Debug.Log("PLAYER HAS EXITED!");
+            SceneManager.LoadScene("WinScene", LoadSceneMode.Single);
         }
     }
 }
